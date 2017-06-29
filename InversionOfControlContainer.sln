@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InversionOfControlContainer", "InversionOfControlContainer\InversionOfControlContainer.csproj", "{E8A1D13B-8BB8-4255-978C-336DE0F88E2B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IOC.Tests", "IOC.Tests\IOC.Tests.csproj", "{F77B8611-564B-4608-9F1E-0159B1B0DB84}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E8A1D13B-8BB8-4255-978C-336DE0F88E2B}.Debug|x86.ActiveCfg = Debug|x86
+		{E8A1D13B-8BB8-4255-978C-336DE0F88E2B}.Debug|x86.Build.0 = Debug|x86
+		{E8A1D13B-8BB8-4255-978C-336DE0F88E2B}.Release|x86.ActiveCfg = Release|x86
+		{E8A1D13B-8BB8-4255-978C-336DE0F88E2B}.Release|x86.Build.0 = Release|x86
+		{F77B8611-564B-4608-9F1E-0159B1B0DB84}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F77B8611-564B-4608-9F1E-0159B1B0DB84}.Debug|x86.Build.0 = Debug|Any CPU
+		{F77B8611-564B-4608-9F1E-0159B1B0DB84}.Release|x86.ActiveCfg = Release|Any CPU
+		{F77B8611-564B-4608-9F1E-0159B1B0DB84}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

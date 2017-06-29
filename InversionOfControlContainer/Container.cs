@@ -1,0 +1,72 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace InversionOfControlContainer
+{
+    public class Container
+    {
+        Dictionary<Type, Type> _map;
+
+        public Container()
+        {
+            _map = new Dictionary<Type, Type>();
+        }
+
+        public ContainerBuilder For<TSource>()
+        {
+            return this.For(typeof(TSource));
+        }
+
+		public ContainerBuilder For(Type sourceType)
+		{
+            return new ContainerBuilder(this, sourceType);
+		}
+
+
+
+        public object Resolve<TSource>()
+        {
+            //return (TSource)this.Resolve(typeof(TSource));
+			return this.Resolve(typeof(TSource));
+
+
+		}
+
+		public object Resolve(Type sourceType)
+		{
+            var destinationType = default(Type);
+			_map.TryGetValue(sourceType, out destinationType);
+			if (destinationType == null)
+			{
+				throw new InvalidOperationException("Could not resolve type: " + sourceType);
+			}
+            return Activator.CreateInstance(destinationType);
+           
+
+		}
+
+        public class ContainerBuilder 
+        {
+            public ContainerBuilder(Container container, Type sourceType)
+            {
+                _container = container;
+                _sourceType = sourceType;
+            }
+
+            Container _container;
+            Type _sourceType;
+
+			public ContainerBuilder Use<T>()
+			{
+                return this.Use(typeof(T));
+			}
+
+			public ContainerBuilder Use(Type destinationType)
+			{
+				_container._map.Add(_sourceType, destinationType);
+                return this;
+			}
+
+        }
+    }
+}
