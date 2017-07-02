@@ -39,6 +39,18 @@ namespace InversionOfControlContainer
             _map.TryGetValue(sourceType, out destinationType);
             if (destinationType == null)
             {
+                if (sourceType.IsGenericType && 
+                    _map.ContainsKey(sourceType.GetGenericTypeDefinition()))
+                {
+                    var destination = _map[sourceType.GetGenericTypeDefinition()];
+                    var closedDestination = destination.MakeGenericType(sourceType.GenericTypeArguments);
+                    return CreateInstance(closedDestination);
+
+                }
+                if (!sourceType.IsAbstract) 
+                {
+                    return CreateInstance(sourceType);
+                }
                 throw new InvalidOperationException("Could not resolve type: " + sourceType);
             }
 

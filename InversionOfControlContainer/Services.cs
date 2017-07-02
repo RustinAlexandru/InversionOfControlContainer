@@ -24,9 +24,13 @@ namespace InversionOfControlContainer
         }
     }
 
+    public class Customer
+    {
+        
+    }
     public class InvoiceService 
     {
-        public InvoiceService(IRepository<Employee> repository, ILogger logger)
+        public InvoiceService(IRepository<Customer> repository, ILogger logger)
         {
 
         }
