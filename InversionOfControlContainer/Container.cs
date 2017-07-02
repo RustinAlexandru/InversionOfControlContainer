@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace InversionOfControlContainer
 {
@@ -33,17 +34,25 @@ namespace InversionOfControlContainer
 		}
 
 		public object Resolve(Type sourceType)
-		{
+        {
             var destinationType = default(Type);
-			_map.TryGetValue(sourceType, out destinationType);
-			if (destinationType == null)
-			{
-				throw new InvalidOperationException("Could not resolve type: " + sourceType);
-			}
-            return Activator.CreateInstance(destinationType);
-           
+            _map.TryGetValue(sourceType, out destinationType);
+            if (destinationType == null)
+            {
+                throw new InvalidOperationException("Could not resolve type: " + sourceType);
+            }
 
-		}
+
+            return CreateInstance(destinationType);
+
+        }
+
+        private object CreateInstance(Type destinationType)
+        {
+            var parameters = destinationType.GetConstructors().OrderByDescending(x => x.GetParameters().Count())
+                                             .First().GetParameters().Select(p => Resolve(p.ParameterType)).ToArray();
+            return Activator.CreateInstance(destinationType, parameters);
+        }
 
         public class ContainerBuilder 
         {
